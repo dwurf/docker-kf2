@@ -11,7 +11,7 @@ function require_steamcmd() {
 
 function require_kf2() {
     # Download kf2
-    [[ -d kf2server ]] || \
+    [[ -d kf2server/Binaries/Win64/KFServer.exe ]] || \
         WINEDEBUG=fixme-all \
         wine steamcmd.exe \
             +login anonymous \
@@ -33,7 +33,7 @@ function require_dlls() {
 
     # Install MS Visual C++ runtime
     [[ -d $HOME/.wine/drive_c/windows/temp/_vcrun2010 ]] || (
-        winetricks -q vcrun2010 & sleep 10
+        winetricks -q vcrun2010 & sleep 30
     )
 }
 
