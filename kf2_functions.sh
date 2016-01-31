@@ -11,7 +11,7 @@ function require_steamcmd() {
 
 function require_kf2() {
     # Download kf2
-    [[ -d kf2server/Binaries/Win64/KFServer.exe ]] || \
+    [[ -f kf2server/Binaries/Win64/KFServer.exe ]] || \
         WINEDEBUG=fixme-all \
         wine steamcmd.exe \
             +login anonymous \
