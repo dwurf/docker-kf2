@@ -1,7 +1,8 @@
 docker-kf2
 ==========
 
-Dockerfile for running a Killing Floor 2 server. Uses wine.
+Dockerfile for running a Killing Floor 2 server under 
+[wine](https://www.winehq.org)
 
 Requirements
 ------------
@@ -29,13 +30,22 @@ difficulty, etc)...
 You can also set the following variable names in 
 `$HOME/KF2/KFGame/Config/PCServer-KFGame.ini`
 
+    [KFGame.KFGameInfo]
     ServerMOTD=Welcome to our server. \n \n Have fun and good luck!
     
+    [Engine.GameReplicationInfo]
     ServerName=Killing Floor 2 Server
+
+    [KFGame.KFGameInfo]
+    GameLength=2
 
 and in `$HOME/KF2/KFGame/Config/KFWeb.ini` you can turn on the web console:
 
+    [IpDrv.WebServer]
     bEnabled=true
+
+Access the web console on port 8080, the username is `admin`, the password is
+set in `config.sh` (default: `secret`)
 
 Building the image
 ------------------
