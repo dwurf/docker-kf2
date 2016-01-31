@@ -19,7 +19,7 @@ Simple start
         -p 0.0.0.0:7777:7777/udp \
         -p 0.0.0.0:8080:8080 \
         -v $HOME/kf2:/kf2 \
-        dwurf/kf2:latest
+        dwurf/docker-kf2:latest
 
 Go do something else for a while, this will take quite some time.
 
