@@ -106,7 +106,7 @@ function launch() {
     local cmd
 
     cmd="wine kf2server/Binaries/Win64/KFServer "
-    cmd+="$map"
+    cmd+="$KF_MAP"
     cmd+="?Difficulty=$KF_DIFFICULTY"
     cmd+="?AdminPassword=$KF_ADMIN_PASS"
     [[ -z "$KF_GAME_PASS" ]] || cmd+="?GamePassword=$KF_GAME_PASS"
