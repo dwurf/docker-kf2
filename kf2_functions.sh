@@ -105,13 +105,11 @@ function launch() {
     export WINEDEBUG=fixme-all
     local cmd
 
-    source config.sh
-
     cmd="wine kf2server/Binaries/Win64/KFServer "
     cmd+="$map"
-    cmd+="?Difficulty=$difficulty"
-    cmd+="?AdminPassword=$admin_password"
-    [[ -z "$game_password" ]] || cmd+="?GamePassword=$game_password"
+    cmd+="?Difficulty=$KF_DIFFICULTY"
+    cmd+="?AdminPassword=$KF_ADMIN_PASS"
+    [[ -z "$KF_GAME_PASS" ]] || cmd+="?GamePassword=$KF_GAME_PASS"
     cmd+=" -Port=7777"
     cmd+=" -WebAdminPort=8080"
     cmd+=" -QueryPort=27015"
