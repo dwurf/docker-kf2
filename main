@@ -11,4 +11,5 @@ require_kf2
 require_dlls
 update
 require_config
+load_config
 launch

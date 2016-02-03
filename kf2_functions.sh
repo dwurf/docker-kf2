@@ -66,25 +66,39 @@ function require_config() {
         kill $kfpid
     fi
 
-    # Generate local docker config
-    if [[ ! -e config.sh ]]; then
-        local config
-        config="# More configuration options in KFGame/Config/PCServer-KFGame.ini\n"
-        config+="# and KFGame/Config/KFWeb.ini\n"
-        config+="\n"
-        config+="# Run this command for a list of maps:\n"
-        config+="# find . -name '*KF-*kfm' | xargs -n 1 basename -s .kfm\n"
-        config+="map=KF-BioticsLab\n"
-        config+="\n"
-        config+="# 0-normal 1-hard 2-suicidal 3-hell on earth\n"
-        config+="difficulty=0\n"
-        config+="\n"
-        config+="admin_password=secret\n"
-        config+="\n"
-        config+="# Uncomment if you want a private server\n"
-        config+="#game_password=secret\n"
-        echo -e "$config" >> config.sh
-    fi
+}
+
+function load_config() {
+
+    ## Load defaults if nothing has been set
+
+    
+    # find /path/to/volume -name '*KF-*kfm' | xargs -n 1 basename -s .kfm\n"
+    [[ -z "$KF_MAP" ]] && export KF_MAP=KF-BioticsLab       
+
+    # 0 - normal, 1 - hard, 2 - suicidal, 3 - hell on earth
+    [[ -z "$KF_DIFFICULTY" ]] && export KF_DIFFICULTY=0
+
+    # Used for web console and in-game logins
+    [[ -z "$KF_ADMIN_PASS" ]] && export KF_ADMIN_PASS=secret
+
+    # Setting this creates a private server
+    [[ -z "$KF_GAME_PASS" ]] && export KF_GAME_PASS=''
+
+    # 0 - 4 waves, 1 - 7 waves, 2 - 10 waves, default 1
+    [[ -z "$KF_GAME_LENGTH" ]] && export KF_GAME_LENGTH=1
+
+    # Name that appears in the server browser
+    [[ -z "$KF_SERVER_NAME" ]] && export KF_SERVER_NAME=KF2 Server
+
+    # true or false, default false
+    [[ -z "$KF_ENABLE_WEB" ]] && export KF_ENABLE_WEB=false
+
+
+    ## Now we edit the config files to set the config
+    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH/" /kf2/kf2server/KFGame/Config/PCServer-KFGame.ini
+    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME/" /kf2/kf2server/KFGame/Config/PCServer-KFGame.ini
+    sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB/" /kf2/kf2server/KFGame/Config/KFWeb.ini
 }
 
 function launch() {

@@ -21,31 +21,46 @@ Simple start
         -v $HOME/kf2:/kf2 \
         dwurf/docker-kf2:latest
 
-Go do something else for a while, this will take quite some time.
+Variables
+---------
 
-Once the container is created, you might like to stop the container and change
-the variables in `$HOME/kf2/config.sh` to your liking (default map, 
-difficulty, etc)...
+`KF_MAP` (default: `KF-BioticsLab`)
 
-You can also set the following variable names in 
-`$HOME/KF2/KFGame/Config/PCServer-KFGame.ini`
+Starting map when the server is first loaded
 
-    [KFGame.KFGameInfo]
-    ServerMOTD=Welcome to our server. \n \n Have fun and good luck!
-    
-    [Engine.GameReplicationInfo]
-    ServerName=Killing Floor 2 Server
+`KF_DIFFICULTY` (default: `0`)
 
-    [KFGame.KFGameInfo]
-    GameLength=2
+Game difficulty. 
 
-and in `$HOME/KF2/KFGame/Config/KFWeb.ini` you can turn on the web console:
+* 0 - normal
+* 1 - hard
+* 2 - suicidal
+* 3 - hell on earth
 
-    [IpDrv.WebServer]
-    bEnabled=true
+`KF_ADMIN_PASS` (default: `secret`)
 
+Used for web console and in-game admin logins
+
+`KF_GAME_PASS` (default: `''`)
+
+Setting this creates a private server
+
+`KF_GAME_LENGTH` (default: `1`)
+
+* 0 - 4 waves
+* 1 - 7 waves
+* 2 - 10 waves
+
+`KF_SERVER_NAME` (default: `Killing Floor 2 Server`)
+
+Name that appears in the server browser
+
+`KF_ENABLE_WEB` (default: `false`)
+
+Set to `true` to enable the web console. You should probably also change the
+default admin password
 Access the web console on port 8080, the username is `admin`, the password is
-set in `config.sh` (default: `secret`)
+set to `KF_ADMIN_PASS` (default: `secret`)
 
 Building the image
 ------------------
