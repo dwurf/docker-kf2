@@ -4,6 +4,8 @@ docker-kf2
 Dockerfile for running a Killing Floor 2 server under 
 [wine](https://www.winehq.org)
 
+Note: The newer releases of Killing Floor 2 no longer run under wine. This repository will be updated once the KF2 Linux dedicated server is released.
+
 Requirements
 ------------
 
