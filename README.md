@@ -1,15 +1,12 @@
 docker-kf2
 ==========
 
-Dockerfile for running a Killing Floor 2 server under 
-[wine](https://www.winehq.org)
-
-Note: The newer releases of Killing Floor 2 no longer run under wine. This repository will be updated once the KF2 Linux dedicated server is released.
+Dockerfile for running a Killing Floor 2 server
 
 Requirements
 ------------
 
-2GB RAM and 10GB free disk space are essential. SSD recommended, otherwise map
+2GB RAM and 30GB free disk space are essential. SSD recommended, otherwise map
 changes will take a long time. Disk space requirements will keep going up as 
 updates are released.
 
@@ -20,7 +17,21 @@ Simple start
         -p 0.0.0.0:27015:27015/udp \
         -p 0.0.0.0:7777:7777/udp \
         -p 0.0.0.0:8080:8080 \
-        -v $HOME/kf2:/kf2 \
+        -v $HOME/kf2:/home/steam/kf2server \
+        dwurf/docker-kf2:latest
+
+Configuring the server
+----------------------
+
+Configuration is done via environment variables. To run a long, hard server:
+
+    docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
+        -p 0.0.0.0:27015:27015/udp \
+        -p 0.0.0.0:7777:7777/udp \
+        -p 0.0.0.0:8080:8080 \
+        -v $HOME/kf2:/home/steam/kf2server \
+        -e KF_DIFFICULTY=1 \
+        -e KF_GAME_LENGTH=2 \
         dwurf/docker-kf2:latest
 
 Variables
@@ -67,5 +78,5 @@ set to `KF_ADMIN_PASS` (default: `secret`)
 Building the image
 ------------------
 
-    docker build .
+    docker build -t dwurf/docker-kf2:latest .
 

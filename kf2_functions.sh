@@ -1,45 +1,25 @@
 function require_steamcmd() {
     # Download/extract steam
     mkdir -p downloads
-    [[ -f downloads/steamcmd.zip ]] || \
-        wget http://media.steampowered.com/installer/steamcmd.zip -P downloads
-    [[ -f steamcmd.exe ]] || unzip -o downloads/steamcmd.zip
+    [[ -f downloads/steamcmd_linux.tar.gz ]] || \
+        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -P downloads
+    [[ -f steamcmd.sh ]] || tar xzvf downloads/steamcmd_linux.tar.gz
     
-    # Install/update steam
-    WINEDEBUG=fixme-all wine steamcmd.exe +exit
+    ./steamcmd.sh +exit
 }
 
 function require_kf2() {
     # Download kf2
     [[ -f kf2server/Binaries/Win64/KFServer.exe ]] || \
-        WINEDEBUG=fixme-all \
-        wine steamcmd.exe \
+        ./steamcmd.sh \
             +login anonymous \
             +force_install_dir ./kf2server \
             +app_update 232130 validate \
             +exit
 }
 
-function require_dlls() {
-    # Download/extract KF2 DLLs
-    mkdir -p downloads
-    [[ -f downloads/KF2_WineDLL.zip ]] || \
-        wget http://www.redorchestra2.fr/downloads/KF2_WineDLL.zip -P downloads
-
-    [[ -f .wine/drive_c/windows/system32/X3DAudio1_7.dll ]] || (
-        cd $HOME/.wine/drive_c/windows/system32
-        unzip -o $OLDPWD/downloads/KF2_WineDLL.zip
-    )
-
-    # Install MS Visual C++ runtime
-    [[ -d $HOME/.wine/drive_c/windows/temp/_vcrun2010 ]] || (
-        winetricks -q vcrun2010 & sleep 30
-    )
-}
-
 function update() {
-    export WINEDEBUG=fixme-all
-    wine steamcmd.exe \
+    ./steamcmd.sh \
         +login anonymous \
         +force_install_dir \
         ./kf2server \
@@ -48,8 +28,7 @@ function update() {
 }
 
 function validate() {
-    export WINEDEBUG=fixme-all
-    wine steamcmd.exe \
+    ./steamcmd.sh \
         +login anonymous \
         +force_install_dir \
         ./kf2server \
@@ -60,7 +39,7 @@ function validate() {
 function require_config() {
     # Generate INI files
     if [[ ! -f kf2server/KFGame/Config/PCServer-KFGame.ini ]]; then
-        wine kf2server/Binaries/Win64/KFServer kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
+        kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
         sleep 20
         kfpid=$(pgrep -f port=7777)
         kill $kfpid
@@ -96,16 +75,16 @@ function load_config() {
 
 
     ## Now we edit the config files to set the config
-    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" /kf2/kf2server/KFGame/Config/PCServer-KFGame.ini
-    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" /kf2/kf2server/KFGame/Config/PCServer-KFGame.ini
-    sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" /kf2/kf2server/KFGame/Config/KFWeb.ini
+    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" kf2server/KFGame/Config/PCServer-KFGame.ini
+    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" kf2server/KFGame/Config/PCServer-KFGame.ini
+    sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" kf2server/KFGame/Config/KFWeb.ini
 }
 
 function launch() {
     export WINEDEBUG=fixme-all
     local cmd
 
-    cmd="wine kf2server/Binaries/Win64/KFServer "
+    cmd="kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 "
     cmd+="$KF_MAP"
     cmd+="?Difficulty=$KF_DIFFICULTY"
     cmd+="?AdminPassword=$KF_ADMIN_PASS"
