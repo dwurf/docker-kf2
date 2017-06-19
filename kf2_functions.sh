@@ -75,8 +75,8 @@ function load_config() {
 
 
     ## Now we edit the config files to set the config
-    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" kf2server/KFGame/Config/PCServer-KFGame.ini
-    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" kf2server/KFGame/Config/PCServer-KFGame.ini
+    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" kf2server/KFGame/Config/LinuxServer-KFGame.ini
+    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" kf2server/KFGame/Config/LinuxServer-KFGame.ini
     sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" kf2server/KFGame/Config/KFWeb.ini
 }
 
