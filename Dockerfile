@@ -10,17 +10,23 @@ USER steam
 ADD kf2_functions.sh kf2_functions.sh 
 ADD main main 
 
-# Steam port
-EXPOSE 20560/udp
+# Steam port range (only 1 required)
+EXPOSE 20560-20579/udp
 
 # Query port - used to communicate with the master server
 EXPOSE 27015/udp
 
-# Game port - primary comms with players
-EXPOSE 7777/udp
+# Game port range (only 1 required) - primary comms with players
+EXPOSE 7777-7796/udp
 
 # Web Admin port
 EXPOSE 8080/tcp
+
+# Steam install is stored here
+VOLUME /home/steam/steamcmd
+
+# Game files are stored here
+VOLUME /home/steam/kf2server
 
 CMD ["/bin/bash", "main"]
 
