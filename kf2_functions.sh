@@ -46,12 +46,16 @@ function require_config() {
 }
 
 function load_config() {
-
     ## Load defaults if nothing has been set
 
-    
+    # Default to survival
+    [[ -z "$KF_GAME_MODE" ]] && export KF_GAME_MODE=Survival
+    if [[ "$KF_GAME_MODE" == 'VersusSurvival' ]]; then
+        KF_GAME_MODE='VersusSurvival?maxplayers=12';
+    fi;
+
     # find /path/to/volume -name '*KF-*kfm' | xargs -n 1 basename -s .kfm\n"
-    [[ -z "$KF_MAP" ]] && export KF_MAP=KF-BioticsLab       
+    [[ -z "$KF_MAP" ]] && export KF_MAP=KF-BioticsLab
 
     # 0 - normal, 1 - hard, 2 - suicidal, 3 - hell on earth
     [[ -z "$KF_DIFFICULTY" ]] && export KF_DIFFICULTY=0
@@ -94,7 +98,7 @@ function launch() {
     local cmd
 
     cmd="${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 "
-    cmd+="$KF_MAP"
+    cmd+="$KF_MAP?Game=KFGameContent.KFGameInfo_$KF_GAME_MODE"
     cmd+="?Difficulty=$KF_DIFFICULTY"
     cmd+="?AdminPassword=$KF_ADMIN_PASS"
     [[ -z "$KF_GAME_PASS" ]] || cmd+="?GamePassword=$KF_GAME_PASS"
