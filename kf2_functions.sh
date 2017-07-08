@@ -21,8 +21,7 @@ function require_kf2() {
 function update() {
     ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir \
-        ./kf2server \
+        +force_install_dir ./kf2server \
         +app_update 232130 \
         +exit
 }
@@ -30,8 +29,7 @@ function update() {
 function validate() {
     ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir \
-        ./kf2server \
+        +force_install_dir ./kf2server \
         +app_update 232130 validate \
         +exit
 }
