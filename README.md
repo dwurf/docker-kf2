@@ -83,7 +83,6 @@ Building the image
 TODO
 ----
 
-* Add support for all game modes https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Game_Modes
 * Add support for running multiple KF2 servers from the one directory
  * Map logs and config to another volume(s)
   * This is docker, we shouldn't need logs (use `docker logs`) and config should be done via env variables (i.e. move the config file outside of the volume but it doesn't need to be exposed)
