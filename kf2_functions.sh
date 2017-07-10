@@ -83,7 +83,7 @@ function load_config() {
     [[ -z "$KF_QUERY_PORT" ]] && export KF_QUERY_PORT="$(($KF_PORT + 19238))"
 
     # default to 8080
-    [[ -z "$KF_WEBADMIN_PORT" ]] && export KF_WEBADMIN_PORT=7777
+    [[ -z "$KF_WEBADMIN_PORT" ]] && export KF_WEBADMIN_PORT=8080
 
 
     ## Now we edit the config files to set the config
