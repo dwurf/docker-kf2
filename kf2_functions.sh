@@ -1,19 +1,19 @@
 function require_steamcmd() {
     # Download/extract steam
-    mkdir -p downloads
-    [[ -f downloads/steamcmd_linux.tar.gz ]] || \
-        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -P downloads
-    [[ -f steamcmd.sh ]] || tar xzvf downloads/steamcmd_linux.tar.gz
+    mkdir -p "${HOME}/downloads"
+    [[ -f "${HOME}/downloads/steamcmd_linux.tar.gz" ]] || \
+        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -P "${HOME}/downloads"
+    [[ -f "${HOME}/steamcmd.sh" ]] || tar xzvf downloads/steamcmd_linux.tar.gz
     
     ./steamcmd.sh +exit
 }
 
 function require_kf2() {
     # Download kf2
-    [[ -f kf2server/Binaries/Win64/KFServer.exe ]] || \
+    [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || \
         ./steamcmd.sh \
             +login anonymous \
-            +force_install_dir ./kf2server \
+            +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 validate \
             +exit
 }
@@ -21,8 +21,7 @@ function require_kf2() {
 function update() {
     ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir \
-        ./kf2server \
+        +force_install_dir "${HOME}/kf2server" \
         +app_update 232130 \
         +exit
 }
@@ -30,16 +29,15 @@ function update() {
 function validate() {
     ./steamcmd.sh \
         +login anonymous \
-        +force_install_dir \
-        ./kf2server \
+        +force_install_dir "${HOME}/kf2server" \
         +app_update 232130 validate \
         +exit
 }
 
 function require_config() {
     # Generate INI files
-    if [[ ! -f kf2server/KFGame/Config/PCServer-KFGame.ini ]]; then
-        kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
+    if [[ ! -f "${HOME}/kf2server/KFGame/Config/PCServer-KFGame.ini" ]]; then
+        "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
         sleep 20
         kfpid=$(pgrep -f port=7777)
         kill $kfpid
@@ -48,12 +46,16 @@ function require_config() {
 }
 
 function load_config() {
-
     ## Load defaults if nothing has been set
 
-    
+    # Default to survival
+    [[ -z "$KF_GAME_MODE" ]] && export KF_GAME_MODE=Survival
+    if [[ "$KF_GAME_MODE" == 'VersusSurvival' ]]; then
+        KF_GAME_MODE='VersusSurvival?maxplayers=12';
+    fi;
+
     # find /path/to/volume -name '*KF-*kfm' | xargs -n 1 basename -s .kfm\n"
-    [[ -z "$KF_MAP" ]] && export KF_MAP=KF-BioticsLab       
+    [[ -z "$KF_MAP" ]] && export KF_MAP=KF-BioticsLab
 
     # 0 - normal, 1 - hard, 2 - suicidal, 3 - hell on earth
     [[ -z "$KF_DIFFICULTY" ]] && export KF_DIFFICULTY=0
@@ -73,25 +75,36 @@ function load_config() {
     # true or false, default false
     [[ -z "$KF_ENABLE_WEB" ]] && export KF_ENABLE_WEB=false
 
+    # default to 7777
+    [[ -z "$KF_PORT" ]] && export KF_PORT=7777
+
+    # default to $(($KF_PORT + 19238))
+    #    (19238 = 27015 - 7777)
+    [[ -z "$KF_QUERY_PORT" ]] && export KF_QUERY_PORT="$(($KF_PORT + 19238))"
+
+    # default to 8080
+    [[ -z "$KF_WEBADMIN_PORT" ]] && export KF_WEBADMIN_PORT=8080
+
 
     ## Now we edit the config files to set the config
-    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" kf2server/KFGame/Config/LinuxServer-KFGame.ini
-    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" kf2server/KFGame/Config/LinuxServer-KFGame.ini
-    sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" kf2server/KFGame/Config/KFWeb.ini
+    sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
+    sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
+    sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" "${HOME}/kf2server/KFGame/Config/KFWeb.ini"
+    [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]] && sed -i 's/^bUsedForTakeover=.*/bUsedForTakeover=FALSE'"\r"'/' "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
 }
 
 function launch() {
     export WINEDEBUG=fixme-all
     local cmd
 
-    cmd="kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 "
-    cmd+="$KF_MAP"
+    cmd="${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64 "
+    cmd+="$KF_MAP?Game=KFGameContent.KFGameInfo_$KF_GAME_MODE"
     cmd+="?Difficulty=$KF_DIFFICULTY"
     cmd+="?AdminPassword=$KF_ADMIN_PASS"
     [[ -z "$KF_GAME_PASS" ]] || cmd+="?GamePassword=$KF_GAME_PASS"
-    cmd+=" -Port=7777"
-    cmd+=" -WebAdminPort=8080"
-    cmd+=" -QueryPort=27015"
+    cmd+=" -Port=$KF_PORT"
+    cmd+=" -WebAdminPort=$KF_WEBADMIN_PORT"
+    cmd+=" -QueryPort=$KF_QUERY_PORT"
 
     echo "Running command: $cmd" > $0-cmd.log
     exec $cmd
