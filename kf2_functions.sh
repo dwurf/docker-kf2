@@ -1,38 +1,43 @@
 function require_steamcmd() {
     # Download/extract steam
-    mkdir -p "${HOME}/downloads"
-    [[ -f "${HOME}/downloads/steamcmd_linux.tar.gz" ]] || \
-        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -P "${HOME}/downloads"
-    [[ -f "${HOME}/steamcmd.sh" ]] || tar xzvf downloads/steamcmd_linux.tar.gz
+    mkdir -p "${HOME}/steam/downloads"
+    [[ -f "${HOME}/steam/downloads/steamcmd_linux.tar.gz" ]] || \
+        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz -P "${HOME}/steam/downloads"
+    [[ -f "${HOME}/steam/steamcmd.sh" ]] || (
+        cd "${HOME}/steam"
+        tar xzvf downloads/steamcmd_linux.tar.gz
+    )
     
-    ./steamcmd.sh +exit
+    (
+        cd "${HOME}/steam"
+        ./steamcmd.sh +exit
+    )
 }
 
 function require_kf2() {
     # Download kf2
-    [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || \
+    [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || ( \
+        cd "${HOME}/steam"
         ./steamcmd.sh \
             +login anonymous \
             +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 validate \
             +exit
+    )
 }
 
 function update() {
-    ./steamcmd.sh \
-        +login anonymous \
-        +force_install_dir "${HOME}/kf2server" \
-        +app_update 232130 \
-        +exit
+    rm -rf "${HOME}/steam/steamapps"
+    (
+        cd "${HOME}/steam"
+        ./steamcmd.sh \
+            +login anonymous \
+            +force_install_dir "${HOME}/kf2server" \
+            +app_update 232130 "$@" \
+            +exit
+    )
 }
 
-function validate() {
-    ./steamcmd.sh \
-        +login anonymous \
-        +force_install_dir "${HOME}/kf2server" \
-        +app_update 232130 validate \
-        +exit
-}
 
 function require_config() {
     # Generate INI files

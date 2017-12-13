@@ -26,5 +26,5 @@ EXPOSE 7777/udp
 # Web Admin port
 EXPOSE 8080/tcp
 
-CMD ["/bin/bash", "main"]
+ENTRYPOINT ["/bin/bash", "main"]
 

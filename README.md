@@ -13,11 +13,13 @@ updates are released.
 Simple start
 ------------
 
+    mkdir -p $HOME/{kf2,kf2_steamdir}
     docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
         -p 0.0.0.0:27015:27015/udp \
         -p 0.0.0.0:7777:7777/udp \
         -p 0.0.0.0:8080:8080 \
         -v $HOME/kf2:/home/steam/kf2server \
+        -v $HOME/kf2_steamdir:/home/steam/steam \
         dwurf/docker-kf2:latest
 
 Configuring the server
@@ -30,9 +32,35 @@ Configuration is done via environment variables. To run a long, hard server:
         -p 0.0.0.0:7777:7777/udp \
         -p 0.0.0.0:8080:8080 \
         -v $HOME/kf2:/home/steam/kf2server \
+        -v $HOME/kf2_steamdir:/home/steam/steam \
         -e KF_DIFFICULTY=1 \
         -e KF_GAME_LENGTH=2 \
         dwurf/docker-kf2:latest
+
+Updating the server
+-------------------
+
+Run with the command `update`
+
+    docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
+        -p 0.0.0.0:27015:27015/udp \
+        -p 0.0.0.0:7777:7777/udp \
+        -p 0.0.0.0:8080:8080 \
+        -v $HOME/kf2:/home/steam/kf2server \
+        -v $HOME/kf2_steamdir:/home/steam/steam \
+        dwurf/docker-kf2:latest \
+        update
+
+Further arguments get passed to the update command, e.g.
+
+    docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
+        -p 0.0.0.0:27015:27015/udp \
+        -p 0.0.0.0:7777:7777/udp \
+        -p 0.0.0.0:8080:8080 \
+        -v $HOME/kf2:/home/steam/kf2server \
+        -v $HOME/kf2_steamdir:/home/steam/steam \
+        dwurf/docker-kf2:latest \
+        update -beta preview validate
 
 Variables
 ---------
@@ -74,6 +102,11 @@ Set to `true` to enable the web console. You should probably also change the
 default admin password
 Access the web console on port 8080, the username is `admin`, the password is
 set to `KF_ADMIN_PASS` (default: `secret`)
+
+`KF_DISABLE_TAKEOVER` (default: `false`)
+
+Set to `true` to prevent randoms from taking over the server. Useful if you've
+set a password on your server.
 
 Building the image
 ------------------
