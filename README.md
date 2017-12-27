@@ -92,6 +92,14 @@ Setting this creates a private server
 * 1 - 7 waves
 * 2 - 10 waves
 
+`KF_GAME_MODE` (default: `Survival`)
+
+Options are:
+
+* Survival
+* VersusSurvival
+* WeeklySurvival
+
 `KF_SERVER_NAME` (default: `Killing Floor 2 Server`)
 
 Name that appears in the server browser
