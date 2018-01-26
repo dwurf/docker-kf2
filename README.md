@@ -3,10 +3,13 @@ docker-kf2
 
 Dockerfile for running a Killing Floor 2 server
 
+* GitHub: https://github.com/dwurf/docker-kf2
+* Docker Hub: https://hub.docker.com/r/dwurf/docker-kf2/
+
 Requirements
 ------------
 
-2GB RAM and 30GB free disk space are essential. SSD recommended, otherwise map
+2GB RAM and 20GB free disk space are essential. SSD recommended, otherwise map
 changes will take a long time. Disk space requirements will keep going up as 
 updates are released.
 
@@ -116,6 +119,38 @@ set to `KF_ADMIN_PASS` (default: `secret`)
 Set to `true` to prevent randoms from taking over the server. Useful if you've
 set a password on your server.
 
+Steam Workshop maps
+-------------------
+
+Under `kf2server`, modify the file `KFGame/Config/LinuxServer-KFEngine.ini` as per [Tripwire's wiki][1]
+
+Example shown below is for [Biolapse - Biotics Holdout][2] by 
+
+[1]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Setting_Up_Steam_Workshop_For_Servers
+[2]: http://steamcommunity.com/sharedfiles/filedetails/?id=1258411772
+
+
+    [OnlineSubsystemSteamworks.KFWorkshopSteamworks]
+    ServerSubscribedWorkshopItems=1258411772
+
+
+You'll also need to add the maps to `LinuxServer-KFGame.ini` as described in the wiki [here][3] and [here][4].
+
+[3]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Maps
+[4]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Get_Custom_Maps_To_Show_In_Web_Admin
+
+Examples:
+
+    [KFGame.KFGameInfo]
+    ...
+    GameMapCycles=(Maps=("KF-BurningParis","KF-Biolapse"))
+    ...
+
+    [KF-Biolapse KFMapSummary]
+    MapName=KF-Biolapse
+    ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Placeholder
+
+
 Building the image
 ------------------
 
@@ -129,7 +164,6 @@ TODO
   * This is docker, we shouldn't need logs (use `docker logs`) and config should be done via env variables (i.e. move the config file outside of the volume but it doesn't need to be exposed)
  * See also ConfigSubDir under https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Command_Line_Launch_Options
 * Add support for custom map cycles https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Maps
-* Steam workshop support https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Setting_Up_Steam_Workshop_For_Servers
 * Server welcome screen https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Setting_Up_Server_Welcome_Screen
 
 
