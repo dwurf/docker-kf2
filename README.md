@@ -119,6 +119,36 @@ set to `KF_ADMIN_PASS` (default: `secret`)
 Set to `true` to prevent randoms from taking over the server. Useful if you've
 set a password on your server.
 
+Running multiple servers
+------------------------
+
+1. Ensure 'command' in docker-compose.yml is not present. Update swill be
+   handled from the first server only.
+2. Change ports (increment), set environment variables to match
+3. Change server name (optional)
+
+Update the volume mounts as follows:
+
+Map the following read-only volume from server 1
+
+ - $HOME/kf2:/home/steam/kf2server:ro \
+
+Map the following read-write volumes
+
+ - $HOME/kf2-server2/steam/:/home/steam/steam
+ - $HOME/kf2-server2/kf2server/KFGame/Logs:/home/steam/kf2server/KFGame/Logs
+ - $HOME/kf2-server2/kf2server/KFGame/Config:/home/steam/kf2server/KFGame/Config
+
+These are only required for Steam Workshop maps (see below)
+
+ - $HOME/kf2-server2/kf2server/Binaries/Win64/steamapps:/home/steam/kf2server/Binaries/Win64/steamapps
+ - $HOME/kf2-server2/kf2server/KFGame/Cache:/home/steam/kf2server/KFGame/Cache
+
+You *must* also copy the basic config files from server1
+
+    mkdir -p $HOME/kf2-server2/kf2server/KFGame/Config
+    cp -a $HOME/kf2/kf2server/KFGame/Config/* $HOME/kf2-server2/kf2server/KFGame/Config
+
 Steam Workshop maps
 -------------------
 
