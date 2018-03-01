@@ -102,6 +102,7 @@ Options are:
 * Survival
 * VersusSurvival
 * WeeklySurvival
+* Endless
 
 `KF_SERVER_NAME` (default: `Killing Floor 2 Server`)
 
