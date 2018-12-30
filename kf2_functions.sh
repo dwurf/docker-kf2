@@ -96,6 +96,7 @@ function load_config() {
     ## Now we edit the config files to set the config
     sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
+    sed -i "s/^AdminPassword.*/AdminPassword=$KF_ADMIN_PASS\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" "${HOME}/kf2server/KFGame/Config/KFWeb.ini"
     [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]] && sed -i 's/^bUsedForTakeover=.*/bUsedForTakeover=FALSE'"\r"'/' "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
     sed -i "s/^DownloadManagers=IpDrv.HTTPDownload/DownloadManagers=OnlineSubsystemSteamworks.SteamWorkshopDownload/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
