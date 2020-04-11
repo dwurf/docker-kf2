@@ -107,7 +107,7 @@ Options are:
 `KF_MUTATORS`
 
 If the mutators are correctly installed to the server they can be used like this:
-`KFMutator.KFMutator_MaxPlayersV2?MaxPlayers=20?MaxMonsters=85,ClassicScoreboard.ClassicSCMut`
+`mutator=ClassicScoreboard.ClassicSCMut,KFMutator.KFMutator_MaxPlayersV2`
 Multiple mutators needs to be seperated with a `,`
 
 `KF_SERVER_NAME` (default: `Killing Floor 2 Server`)
