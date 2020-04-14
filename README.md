@@ -104,6 +104,12 @@ Options are:
 * WeeklySurvival
 * Endless
 
+`KF_MUTATORS`
+
+If the mutators are correctly installed to the server they can be used like this:
+`mutator=ClassicScoreboard.ClassicSCMut,KFMutator.KFMutator_MaxPlayersV2`
+Multiple mutators needs to be seperated with a `,`
+
 `KF_SERVER_NAME` (default: `Killing Floor 2 Server`)
 
 Name that appears in the server browser
