@@ -110,6 +110,7 @@ function launch() {
     cmd+="$KF_MAP?Game=KFGameContent.KFGameInfo_$KF_GAME_MODE"
     cmd+="?Difficulty=$KF_DIFFICULTY"
     cmd+="?AdminPassword=$KF_ADMIN_PASS"
+    [[ -z "$MULTIHOME_IP" ]] || cmd+="?Multihome=${MULTIHOME_IP}"
     [[ -z "$KF_MUTATORS" ]] || cmd+="?Mutator=$KF_MUTATORS"
     [[ -z "$KF_GAME_PASS" ]] || cmd+="?GamePassword=$KF_GAME_PASS"
     cmd+=" -Port=$KF_PORT"

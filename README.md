@@ -92,6 +92,7 @@ Variables
 | `KF_ENABLE_WEB`       | `false`           | A boolean toggle for the web interface hosted on the KF_WEBADMIN_PORT (default 8080) If setting this to true, it's recommended you change the `KF_ADMIN_PASS` variable too.                                |
 | `KF_WEBADMIN_PORT`    | `8080`            | The port used to access the web admin interface.                                                                                                                                                           |
 | `KF_DISABLE_TAKEOVER` | `false`           | Allows the server to be used by other players looking to create a private game when the server is uninhabited.                                                                                             |
+| `MULTIHOME_IP` | `''` | Sets the IP to run the server on in cases where it has been assigned multiple public IPs. |
 
 
 Running multiple servers
