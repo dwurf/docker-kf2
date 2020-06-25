@@ -92,6 +92,11 @@ Variables
 | `KF_ENABLE_WEB`       | `false`           | A boolean toggle for the web interface hosted on the KF_WEBADMIN_PORT (default 8080) If setting this to true, it's recommended you change the `KF_ADMIN_PASS` variable too.                                |
 | `KF_WEBADMIN_PORT`    | `8080`            | The port used to access the web admin interface.                                                                                                                                                           |
 | `KF_DISABLE_TAKEOVER` | `false`           | Allows the server to be used by other players looking to create a private game when the server is uninhabited.                                                                                             |
+| `KF_BANNER_LINK`      | `http:\/\/art.tripwirecdn.com\/TestItemIcons\/MOTDServer.png` | A link to a PNG file to display on the server welcome page. You must escape special characters. |
+| `KF_MOTD`             | `Welcome to our server. \n \n Have fun and good luck!` | A MOTD message to show under the banner image on the welcome page. You must escape special characters. |
+| `KF_WEBSITE_LINK` | `http:\/\/killingfloor2.com` | A website link shown at the bottom of the srver welcome page to allow the visitor to go to your site. You must escape special characters. |
+
+**NOTE:** Special characters are anything that `sed` considers special, so /, ^, \, * etc. To escape the character, prepend \ before it as in the examples provided in the compose files and above.
 
 
 Running multiple servers
