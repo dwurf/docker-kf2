@@ -21,9 +21,12 @@ services:
             - KF_QUERY_PORT=27015
             - KF_PORT=7777
             - KF_WEBADMIN_PORT=8080
+            - KF_BANNER_LINK="http:\/\/art.tripwirecdn.com\/TestItemIcons\/MOTDServer.png"
+            - KF_MOTD="Welcome to our server!"
+            - KF_WEBSITE_LINK="https:\/\/killingfloor2.com\/"
         volumes:
-            - ./kf2server/:/home/steam/kf2server 
-            - ./kf2_steamdir/:/home/steam/steam 
+            - ./kf2server/:/home/steam/kf2server
+            - ./kf2_steamdir/:/home/steam/steam
         logging:
             # limit logs retained on host to 25MB
             driver: "json-file"
