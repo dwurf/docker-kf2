@@ -115,7 +115,6 @@ function load_config() {
 }
 
 function launch() {
-  echo "KF server at: ${HOME}/kf2server/"
     export WINEDEBUG=fixme-all
     local cmd
 
