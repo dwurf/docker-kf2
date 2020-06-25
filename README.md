@@ -167,6 +167,11 @@ Building the image
 
     docker build -t dwurf/docker-kf2:latest .
 
+Similar projects
+----------------
+
+* [KF1 server in Docker](https://github.com/Vel-San/killing-floor-docker)
+
 TODO
 ----
 
