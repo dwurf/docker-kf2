@@ -46,7 +46,7 @@ function require_config() {
         sleep 20
         kfpid=$(pgrep -f port=7777)
         kill $kfpid
-        # Workaround as per https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Setting_Up_Steam_Workshop_For_Servers
+        #Workaround as per https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Setting_Up_Steam_Workshop_For_Servers
         mkdir -p "${HOME}/kf2server/KFGame/Cache"
     fi
 
@@ -92,6 +92,15 @@ function load_config() {
     # default to 8080
     [[ -z "$KF_WEBADMIN_PORT" ]] && export KF_WEBADMIN_PORT=8080
 
+    #default to the URL for the default MOTD
+    [[ -z "$KF_BANNER_LINK" ]] && export KF_BANNER_LINK="http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png"
+
+    #default server message
+    [[ -z "$KF_MOTD" ]] && export KF_MOTD="Welcome to our server. \n \n Have fun and good luck!"
+
+    #default to killingfloor2.com
+    [[ -z "$KF_WEBSITE_LINK" ]] && export KF_WEBSITE_LINK="http://killingfloor2.com/"
+
 
     ## Now we edit the config files to set the config
     sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
@@ -99,10 +108,14 @@ function load_config() {
     sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" "${HOME}/kf2server/KFGame/Config/KFWeb.ini"
     [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]] && sed -i 's/^bUsedForTakeover=.*/bUsedForTakeover=FALSE'"\r"'/' "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
     sed -i "s/^DownloadManagers=IpDrv.HTTPDownload/DownloadManagers=OnlineSubsystemSteamworks.SteamWorkshopDownload/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
+    sed -i "s/^BannerLink=.*/BannerLink=${KF_BANNER_LINK}/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
+    sed -i "s/^ServerMOTD=.*/ServerMOTD=${KF_MOTD}/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
+    sed -i "s/^WebsiteLink=.*/WebsiteLink=${KF_WEBSITE_LINK}/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
 
 }
 
 function launch() {
+  echo "KF server at: ${HOME}/kf2server/"
     export WINEDEBUG=fixme-all
     local cmd
 
