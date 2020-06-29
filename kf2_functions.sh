@@ -106,7 +106,11 @@ function load_config() {
     sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" "${HOME}/kf2server/KFGame/Config/KFWeb.ini"
-    [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]] && sed -i 's/^bUsedForTakeover=.*/bUsedForTakeover=FALSE'"\r"'/' "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
+    if [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]]; then 
+      sed -i "s/^bUsedForTakeover=.*/bUsedForTakeover=FALSE\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
+    else
+      sed -i "s/^bUsedForTakeover=.*/bUsedForTakeover=TRUE\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
+    fi
     sed -i "s/^DownloadManagers=IpDrv.HTTPDownload/DownloadManagers=OnlineSubsystemSteamworks.SteamWorkshopDownload/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
     sed -i "s/^BannerLink=.*/BannerLink=${KF_BANNER_LINK}/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^ServerMOTD=.*/ServerMOTD=${KF_MOTD}/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
