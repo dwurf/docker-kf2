@@ -2,9 +2,14 @@ FROM ubuntu:xenial
 
 RUN \
 	apt-get -y update && \
-	apt-get -y install wget lib32gcc1 && \
+	apt-get -y install wget lib32gcc1 libcurl4-openssl-dev libssl1.0.0 libssl-dev openssl && \
 	apt-get clean && \
 	find /var/lib/apt/lists -type f | xargs rm -vf
+
+# Create link to fix ssl and crypto libraries
+RUN \
+	ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /lib/x86_64-linux-gnu/libssl.so.1.1 && \
+	ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /lib/x86_64-linux-gnu/libcrypto.so.1.1
 
 RUN useradd -m steam
 
