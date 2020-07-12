@@ -1,8 +1,8 @@
-FROM ubuntu:xenial
+FROM ubuntu:eoan
 
 RUN \
 	apt-get -y update && \
-	apt-get -y install wget lib32gcc1 && \
+	apt-get -y install wget lib32gcc1 libcurl4 && \
 	apt-get clean && \
 	find /var/lib/apt/lists -type f | xargs rm -vf
 
