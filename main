@@ -6,12 +6,12 @@ mkdir -p kf2server
 source kf2_functions.sh
 
 require_ruby
-#require_steamcmd
-#require_kf2
-#if [[ $1 = "update" ]]; then
-#    shift
-#    update "$@"
-#fi
-#require_config
-#load_config
-#launch
+require_steamcmd
+require_kf2
+if [[ $1 = "update" ]]; then
+    shift
+    update "$@"
+fi
+require_config
+load_config
+launch
