@@ -1,8 +1,8 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 RUN \
 	apt-get -y update && \
-	apt-get -y install wget lib32gcc1 && \
+	apt-get -y install wget lib32gcc1 ruby && \
 	apt-get clean && \
 	find /var/lib/apt/lists -type f | xargs rm -vf
 
@@ -12,7 +12,8 @@ WORKDIR /home/steam
 USER steam
 
 ADD kf2_functions.sh kf2_functions.sh 
-ADD main main 
+ADD main main
+ADD configurator configurator
 
 # Steam port
 EXPOSE 20560/udp

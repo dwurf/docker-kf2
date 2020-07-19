@@ -14,6 +14,13 @@ function require_steamcmd() {
     )
 }
 
+function require_ruby() {
+  ruby -v
+  [[ -f Gemfile ]] && ( \
+    bundle install
+  )
+}
+
 function require_kf2() {
     # Download kf2
     [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || ( \
@@ -40,6 +47,7 @@ function update() {
 
 
 function require_config() {
+  
     # Generate INI files
     if [[ ! -f "${HOME}/kf2server/KFGame/Config/PCServer-KFGame.ini" ]]; then
         "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
@@ -48,6 +56,13 @@ function require_config() {
         kill $kfpid
         #Workaround as per https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Setting_Up_Steam_Workshop_For_Servers
         mkdir -p "${HOME}/kf2server/KFGame/Cache"
+    fi
+
+    if [[ -f "${HOME}/game.yml" ]]; then
+      (
+        cd "${HOME}/configurator"
+        ruby GenerateConfig.rb
+      )
     fi
 
 }
