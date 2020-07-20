@@ -3,7 +3,7 @@ DefaultGame=KFGameContent.KFGameInfo_Survival
 DefaultServerGame=KFGameContent.KFGameInfo_Survival
 bAdminCanPause=false
 MaxPlayers=12
-GameDifficulty=2.000000
+GameDifficulty=0.000000
 bChangeLevels=True
 MaxSpectators=2
 MaxIdleTime=0.000000
@@ -29,7 +29,7 @@ bAuthenticateServer=True
 bAuthenticateListenHost=True
 MaxAuthRetryCount=3
 AuthRetryDelay=5
-AdminPassword=secret
+AdminPassword=
 GamePassword=
 
 [DefaultPlayer]
@@ -197,7 +197,7 @@ bSkipBestFlashlightCheck=false
 [KFGame.KFPlayerController]
 bDebugTargetAdhesion=False
 SavedPerkIndex=1
-ForceFeedbackManagerClassName=WinDrv.XnaForceFeedbackManager
+ForceFeedbackManagerClassName="WinDrv.XnaForceFeedbackManager"
 
 [KFGame.KFPawn]
 bAllowFootstepSounds=True
@@ -232,17 +232,6 @@ MaxPersistentSplatsPerFrame=75
 FriendlyHudScale=1.0
 
 [KFGame.KFGameInfo]
-<<<<<<< HEAD
-GameModes=(FriendlyName="Survival",ClassNameAndPath="KFGameContent.KFGameInfo_Survival",bSoloPlaySupported=True,DifficultyLevels=4,Lengths=4,LocalizeID=0)
-GameModes=(FriendlyName="Weekly",ClassNameAndPath="KFGameContent.KFGameInfo_WeeklySurvival",bSoloPlaySupported=True,DifficultyLevels=0,Lengths=0,LocalizeID=1)
-GameModes=(FriendlyName="Versus",ClassNameAndPath="KFGameContent.KFGameInfo_VersusSurvival",bSoloPlaySupported=False,DifficultyLevels=0,Lengths=0,LocalizeID=2)
-GameModes=(FriendlyName="Endless",ClassNameAndPath="KFGameContent.KFGameInfo_Endless",bSoloPlaySupported=True,DifficultyLevels=4,Lengths=0,LocalizeID=3)
-GameModes=(FriendlyName="Objective",ClassNameAndPath="KFGameContent.KFGameInfo_Objective",bSoloPlaySupported=True,DifficultyLevels=4,Lengths=0,LocalizeID=4)
-GameLength=0
-MinNetPlayers=1
-GameStartDelay=4
-ReadyUpDelay=4
-=======
 GameModes=(FriendlyName="Survival",ClassNameAndPath="KFGameContent.KFGameInfo_Survival",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=4,LocalizeID=0)
 GameModes=(FriendlyName="Weekly",ClassNameAndPath="KFGameContent.KFGameInfo_WeeklySurvival",bSoloPlaySupported=true,DifficultyLevels=0,Lengths=0,LocalizeID=1)
 GameModes=(FriendlyName="Versus",ClassNameAndPath="KFGameContent.KFGameInfo_VersusSurvival",bSoloPlaySupported=false,DifficultyLevels=0,Lengths=0,LocalizeID=2)
@@ -252,7 +241,12 @@ GameLength=1
 MinNetPlayers=1
 GameStartDelay=4
 ReadyUpDelay=90
-<%= maplist.renderMapCycles %>
+bWaitForNetPlayers=true
+GameplayEventsWriterClassName=KFGame.KFGameplayEventsWriter
+bEnableMapObjectives=true
+bUseMapList=True
+ActiveMapCycle=0
+<%= maplist.renderMapCycle %>
 EndOfGameDelay=15
 FriendlyFireScale=0.000000
 KickVotePercentage=0.660000
@@ -261,8 +255,8 @@ VoteTime=60.0
 MapVoteDuration=60.000000
 bLogGameBalance=true
 BannerLink=http://art.tripwirecdn.com/TestItemIcons/MOTDServer.png
-ServerMOTD=Welcome to our server!
-WebsiteLink=https://killingfloor2.com/
+ServerMOTD=Welcome to our server. \n \n Have fun and good luck!
+WebsiteLink=http://killingfloor2.com/
 ServerMOTDColor=(B=254,G=254,R=254,A=192)
 WebLinkColor=(B=254,G=254,R=254,A=192)
 ClanMotto=This is the clan motto.
@@ -311,560 +305,6 @@ PercentForBadPing=0.000000
 JoinInProgressStandbyWaitTime=0.000000
 DefaultGameType=KFGameContent.KFGameInfo_Survival
 AnimTreePoolSize=0
-<<<<<<< HEAD
-
-
-
-
-[KFGame.KFCheatManager]
-DebugCameraControllerClassName=KFGame.KFDebugCameraController
-
-[KFGame.KFAIDirector]
-bShowAINames=false
-bDebugAllAI=false
-bLoadDebugPackageResourcesAtStart=false
-AiDebugScreenLargeFontName=AI_Debug_Helpers.Font_Large
-DebugIsSprintingIconName=AI_Debug_Helpers.DebugIsSprintingIcon
-DebugIsWalkingIconName=AI_Debug_Helpers.DebugIsWalkingIcon
-
-[KFGame.KFDoorGraph]
-bAfterBuildWriteOutGraph=true
-DoorGraphEdgeDebugDisplayColor=(R=0,G=255,B=0,A=255)
-
-[KFGame.KFDoorVertex]
-OffsetUnoccupiedLineDebugDisplayColor=(R=0,G=0,B=255,A=255)
-OffsetOccupiedLineDebugDisplayColor=(R=14,G=162,B=247,A=255)
-Offset2DoorLineDebugDisplayColor=(R=146,G=14,B=247,A=255)
-RegisteredCtrlTextDebugDisplayColor=(R=252,G=244,B=7,A=255)
-DoorActorNameTextDebugDisplayColor=(R=253,G=253,B=250,A=255)
-DoorActorNavLocLeftDebugDisplayColor=(R=255,G=0,B=0,A=255)
-DoorActorNavLocRightDebugDisplayColor=(R=0,G=255,B=0,A=255)
-bShowDoorActorNameText=true
-DoorVertexOffsetCrossSize=20
-DoorVertexOffsetNameOfOccupierSize=40
-DoorVertexShowOffsetCosOfAngle=0.76
-
-[KFGame.KFAiDestructibleInterActionBehavior]
-MaxNumberOfBumpsBeforeAttacking=5
-
-[KFGame.KFScout]
-bReplacePathNodesWithKFPathNodes=false
-bDebugReplacePathNodes=false
-
-[KFGame.KFPlayerReplicationInfo]
-ActivePerkIndex=255
-StoredCharIndex=0
-
-[KFGame.KFPerk]
-bLogPerk=false
-
-[KFGame.KFPerk_Commando]
-bOverrideCloud=false
-Level=0
-Build=0
-
-[KFGame.KFPerk_Berserker]
-bOverrideCloud=false
-Level=0
-Build=0
-
-[KFGame.KFPerk_Support]
-bOverrideCloud=false
-Level=0
-Build=0
-
-[KFGame.KFWeap_FlameBase]
-bArePilotLightsAllowed=True
-
-[KFGame.KFWeapAttach_FlameBase]
-bArePilotLightsAllowed=True
-
-[Engine.GameReplicationInfo]
-ServerName=KF2 Server
-ShortName=KFServer
-
-[KFGame.KFGameEngine]
-MasterVolumeMultiplier=100
-DialogVolumeMultiplier=100
-MusicVolumeMultiplier=50
-SFxVolumeMultiplier=100
-BattleChatterIndex=0
-GammaMultiplier=0.68
-bMusicVocalsEnabled=false
-bMinimalChatter=false
-bEnableAdvDebugLines=false
-bMuteOnLossOfFocus=True
-bShowCrossHair=false
-FOVOptionsPercentageValue=1.000000
-GoreLevel=2
-bShowWelderInInv=False
-bUseAltAimOnDual=False
-bAntiMotionSickness=False
-bEnableNative4k=False
-ServerActors=IpDrv.WebServer
-bClearAnimSetLinkupCachesOnLoadMap=False
-bEnableSecondaryDisplay=False
-bEnableSecondaryViewport=False
-MaxDeltaTime=0.000000
-LocalPlayerClassName=Engine.LocalPlayer
-bUseBackgroundLevelStreaming=True
-bSubtitlesEnabled=True
-bSubtitlesForcedOff=False
-bSmoothFrameRate=True
-bCheckForMultiplePawnsSpawnedInAFrame=False
-bForceStaticTerrain=False
-bForceCPUSkinning=False
-bUsePostProcessEffects=False
-bOnScreenKismetWarnings=True
-bEnableKismetLogging=False
-bAllowMatureLanguage=False
-bPauseOnLossOfFocus=False
-DefaultPostProcessName=PP_KFPostProcess.KFCustomPostProcessChain_1
-ThumbnailSkeletalMeshPostProcessName=EngineMaterials.DefaultThumbnailPostProcess
-ThumbnailParticleSystemPostProcessName=EngineMaterials.DefaultThumbnailPostProcess
-ThumbnailMaterialPostProcessName=EngineMaterials.DefaultThumbnailPostProcess
-DefaultUIScenePostProcessName=EngineMaterials.DefaultUIPostProcess
-TimeBetweenPurgingPendingKillObjects=60.000000
-MaxSmoothedFrameRate=62.000000
-MinSmoothedFrameRate=22.000000
-NumPawnsAllowedToBeSpawnedInAFrame=2
-ScoutClassName=KFGame.KFScout
-MeshLODRange=0.000000
-CameraRotationThreshold=45.000000
-CameraTranslationThreshold=10000.000000
-PrimitiveProbablyVisibleTime=8.000000
-LightProbablyVisibleTime=8.000000
-PercentUnoccludedRequeries=0.125000
-MaxOcclusionPixelsFraction=0.100000
-MaxFluidNumVerts=1048576
-FluidSimulationTimeLimit=30.000000
-MaxParticleResize=0
-MaxParticleResizeWarn=0
-MaxParticleVertexMemory=131972
-BeginUPTryCount=200000
-
-[KFGame.SprayActor]
-bAllowSprayLights=True
-
-[KFGame.KFUIDataStore_GameResource]
-ElementProviderTypes=(ProviderTag="GameTypes",ProviderClassName="KFGame.KFGameInfoSummary")
-ElementProviderTypes=(ProviderTag="Maps",ProviderClassName="KFGame.KFMapSummary")
-ElementProviderTypes=(ProviderTag="Mutators",ProviderClassName="KFGame.KFMutatorSummary")
-
-[KF-Shipment KFMapSummary]
-MapName=KF-Shipment
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Shipment
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-KF1-Aperture KFMapSummary]
-MapName=KF-KF1-Aperture
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_KF1-Aperture
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Farmhouse-ZM KFMapSummary]
-MapName=KF-Farmhouse-ZM
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Airship
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Airship KFMapSummary]
-MapName=KF-Airship
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Airship
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-AshwoodAsylum KFMapSummary]
-MapName=KF-AshwoodAsylum
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Asylum
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Biolapse KFMapSummary]
-MapName=KF-Biolapse
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Biolapse
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[KF-Mario_64_Remastered KFMapSummary]
-MapName=KF-Mario_64_Remastered
-MapAssociation=1
-ScreenshowPathName=UI_MapPreview_TEX.UI_MapPreview_KF-MArio_64_Remastered
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-NachtDerUntoten KFMapSummary]
-MapName=KF-NachDerUntoten
-MapAssociation=1
-ScreenshowPathName=UI_MapPreview_TEX.UI_MapPreview_NachtDerUntoten
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-BioticsLab KFMapSummary]
-MapName=KF-BioticsLab
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_BioticsLab
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-BlackForest KFMapSummary]
-MapName=KF-BlackForest
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_BlackForest
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-BurningParis KFMapSummary]
-MapName=KF-BurningParis
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Paris
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Catacombs KFMapSummary]
-MapName=KF-Catacombs
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Catacombs
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-ContainmentStation KFMapSummary]
-MapName=KF-ContainmentStation
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_ContainmentStation
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Desolation KFMapSummary]
-MapName=KF-Desolation
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Desolation
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-DieSector KFMapSummary]
-MapName=KF-DieSector
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_DieSector
-bPlayableInSurvival=False
-bPlayableInWeekly=False
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-EvacuationPoint KFMapSummary]
-MapName=KF-EvacuationPoint
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Evac
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Farmhouse KFMapSummary]
-MapName=KF-Farmhouse
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Farmhouse
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-HostileGrounds KFMapSummary]
-MapName=KF-HostileGrounds
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_HostileGrounds
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-InfernalRealm KFMapSummary]
-MapName=KF-InfernalRealm
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_InfernalRealm
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-KrampusLair KFMapSummary]
-MapName=KF-KrampusLair
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_KrampusLair
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[KF-Lockdown KFMapSummary]
-MapName=KF-Lockdown
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Lockdown
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Monsterball KFMapSummary]
-MapName=KF-MonsterBall
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_MonsterBall
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Nightmare KFMapSummary]
-MapName=KF-Nightmare
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Nightmare
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[KF-Nuked KFMapSummary]
-MapName=KF-Nuked
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Nuked
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-Outpost KFMapSummary]
-MapName=KF-Outpost
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_OutPost
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-PowerCore_Holdout KFMapSummary]
-MapName=KF-PowerCore_Holdout
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_PowerCore
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[KF-Prison KFMapSummary]
-MapName=KF-Prison
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Prison
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Sanitarium KFMapSummary]
-MapName=KF-Sanitarium
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Sanitarium
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-SantasWorkshop KFMapSummary]
-MapName=KF-SantasWorkshop
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_SantasWorkshop
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-ShoppingSpree KFMapSummary]
-MapName=KF-ShoppingSpree
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_ShoppingSpree
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-Spillway KFMapSummary]
-MapName=KF-Spillway
-MapAssociation=1
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Spillway
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-SteamFortress KFMapSummary]
-MapName=KF-SteamFortress
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_SteamFortress
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-TheDescent KFMapSummary]
-MapName=KF-TheDescent
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Descent
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=False
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[KF-TragicKingdom KFMapSummary]
-MapName=KF-TragicKingdom
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_TragicKingdom
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-VolterManor KFMapSummary]
-MapName=KF-VolterManor
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.KF2_MapPreview_Manor
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=False
-
-[KF-ZedLanding KFMapSummary]
-MapName=KF-ZedLanding
-MapAssociation=2
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Zedlanding
-bPlayableInSurvival=True
-bPlayableInWeekly=True
-bPlayableInVsSurvival=True
-bPlayableInEndless=True
-bPlayableInObjective=True
-
-[KF-Default KFMapSummary]
-MapName=KF-Default
-MapAssociation=0
-ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Placeholder
-bPlayableInSurvival=False
-bPlayableInWeekly=False
-bPlayableInVsSurvival=False
-bPlayableInEndless=False
-bPlayableInObjective=False
-
-[Boom KFWeeklyOutBreakInformation]
-Index=0
-IconPath=WeeklyObjective_UI.UI_Weeklies_Boom
-RewardIDs[0]=-1
-
-[Zombies KFWeeklyOutBreakInformation]
-Index=1
-IconPath=WeeklyObjective_UI.UI_Weeklies_Zombies
-RewardIDs[0]=-1
-
-[ShrinkyDinky KFWeeklyOutBreakInformation]
-Index=2
-IconPath=WeeklyObjective_UI.UI_Weeklies_TinyTerror
-RewardIDs[0]=-1
-
-[BigHead KFWeeklyOutBreakInformation]
-Index=3
-IconPath=WeeklyObjective_UI.UI_Weeklies_Bighead
-RewardIDs[0]=-1
-
-[PoundAmmonium KFWeeklyOutBreakInformation]
-Index=4
-IconPath=WeeklyObjective_UI.UI_Weeklies_Poundamonium
-RewardIDs[0]=-1
-
-[DeathBalloons KFWeeklyOutBreakInformation]
-Index=5
-IconPath=WeeklyObjective_UI.UI_Weeklies_DeathBalloons
-RewardIDs[0]=-1
-
-[ZedTime KFWeeklyOutBreakInformation]
-Index=6
-IconPath=WeeklyObjective_UI.UI_Weeklies_Zedtime
-RewardIDs[0]=-1
-
-[BeefCake KFWeeklyOutBreakInformation]
-Index=7
-IconPath=WeeklyObjective_UI.UI_Weeklies_Beefcake
-RewardIDs[0]=-1
-
-[Survival KFGameInfoSummary]
-ClassName=KFGameContent.KFGameInfo_Survival
-MapPrefix=KF
-=======
 
 [KFGameContent.KFGameInfo_WeeklySurvival]
 bEnableGameAnalytics=true
@@ -902,7 +342,6 @@ GameModes=(FriendlyName="Weekly",ClassNameAndPath="KFGameContent.KFGameInfo_Week
 GameModes=(FriendlyName="Versus",ClassNameAndPath="KFGameContent.KFGameInfo_VersusSurvival",bSoloPlaySupported=false,DifficultyLevels=0,Lengths=0,LocalizeID=2)
 GameModes=(FriendlyName="Endless",ClassNameAndPath="KFGameContent.KFGameInfo_Endless",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=0,LocalizeID=3)
 GameModes=(FriendlyName="Objective",ClassNameAndPath="KFGameContent.KFGameInfo_Objective",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=0,LocalizeID=4)
->>>>>>> 4754ab6... KFGame.ini done and working
 
 [KFGame.KFCheatManager]
 DebugCameraControllerClassName=KFGame.KFDebugCameraController
@@ -968,7 +407,7 @@ bArePilotLightsAllowed=True
 bArePilotLightsAllowed=True
 
 [Engine.GameReplicationInfo]
-ServerName=KF2 Server
+ServerName=Killing Floor 2 Server
 ShortName=KFServer
 
 [KFGame.KFGameEngine]
@@ -994,7 +433,7 @@ ElementProviderTypes=(ProviderTag="GameTypes",ProviderClassName="KFGame.KFGameIn
 ElementProviderTypes=(ProviderTag="Maps",ProviderClassName="KFGame.KFMapSummary")
 ElementProviderTypes=(ProviderTag="Mutators",ProviderClassName="KFGame.KFMutatorSummary")
 
-<%= maplist.renderSummaries() %>
+<%= maplist.renderSummaries %>
 
 [Boom KFWeeklyOutBreakInformation]
 Index=0
@@ -1063,17 +502,10 @@ bCanLeap=true
 ShellEjectLifetime=10.f
 
 [IniVersion]
-<<<<<<< HEAD
-0=1593085076.000000
-1=1593085395.000000
-2=1593085074.000000
-3=1593085413.000000
-=======
-0=1594920605.000000
-1=1594920525.000000
-2=1594920607.000000
-3=1594920523.000000
->>>>>>> 4754ab6... KFGame.ini done and working
+0=1595201122.000000
+1=1595201466.000000
+2=1595201121.000000
+3=1595201466.000000
 
 [KFGameContent.KFGameInfo_Objective]
 GameModes=(FriendlyName="Survival",ClassNameAndPath="KFGameContent.KFGameInfo_Survival",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=4,LocalizeID=0)
@@ -1082,9 +514,3 @@ GameModes=(FriendlyName="Versus",ClassNameAndPath="KFGameContent.KFGameInfo_Vers
 GameModes=(FriendlyName="Endless",ClassNameAndPath="KFGameContent.KFGameInfo_Endless",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=0,LocalizeID=3)
 GameModes=(FriendlyName="Objective",ClassNameAndPath="KFGameContent.KFGameInfo_Objective",bSoloPlaySupported=true,DifficultyLevels=4,Lengths=0,LocalizeID=4)
 
-<<<<<<< HEAD
-[KFGame.KFAccessControl]
-bSilentAdminLogin=False
-
-=======
->>>>>>> 4754ab6... KFGame.ini done and working

@@ -232,7 +232,7 @@ PumpWindowMessagesWhenRenderThreadStalled=False
 [Engine.GameEngine]
 MaxDeltaTime=0
 ServerActors=IpDrv.WebServer
-bUsedForTakeover=FALSE
+bUsedForTakeover=TRUE
 
 [Engine.DemoRecDriver]
 AllowDownloads=True
@@ -430,7 +430,7 @@ ServerTravelPause=4.0
 NetServerMaxTickRate=30.0
 LanServerMaxTickRate=35
 NetServerLobbyTickRate=5
-DownloadManagers=OnlineSubsystemSteamworks.SteamWorkshopDownload
+DownloadManagers=IpDrv.HTTPDownload
 DownloadManagers=Engine.ChannelDownload
 NetConnectionClassName=IpDrv.TcpipConnection
 MaxDownloadSize=1024000
@@ -1176,10 +1176,10 @@ RedirectToURL=
 ImpactParticleEffectInterval=0.5
 
 [IniVersion]
-0=1594920607.000000
-1=1594920521.000000
-2=1594920605.000000
-3=1594920512.000000
+0=1595201121.000000
+1=1595201298.000000
+2=1595201121.000000
+3=1595201298.000000
 Patch=1053
 
 <%= maplist.renderSteamworksIds %>
