@@ -133,33 +133,31 @@ You *must* also copy the basic config files from server1
 Steam Workshop maps
 -------------------
 
-Under `kf2server`, modify the file `KFGame/Config/LinuxServer-KFEngine.ini` as per [Tripwire's wiki][1]
+Find the map you wish to use on the Steam workshop, for example [https://steamcommunity.com/sharedfiles/filedetails/?id=1551913612][]. Note the ID argument from the URL (1551913612) and the name of the map (KF-NachtDerUntoten_TraderPod) and add this to a `game.yml` file in the root directory using the `custommaps` property, like so:
 
-Example shown below is for [Biolapse - Biotics Holdout][2] by 
+```
+custommaps:
+  - name: "KF-NachtDerUntoten_TraderPod",
+    steamworksids:
+      - 1551913612
+```
 
-[1]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Setting_Up_Steam_Workshop_For_Servers
-[2]: http://steamcommunity.com/sharedfiles/filedetails/?id=1258411772
+At runtime, the configuration files will be written and will include the map alongside the defaults. A number of things are possible to set for each map added. These are listed below:
+
+| Property             | Default                                     | Description                                                                                                                                                                                |
+|----------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name                 | N/A                                         | Must be set otherwise the configuration will not be generated. The name of the map you're adding, per it's name in the Cache directory of the server.                                      |
+| steamworksids        | N/A                                         | Must be set in order to download the map at runtime. An array of IDs provided to the KFEngine ini file to download the relevant map. This can be set to multiple things for accessibility. |
+| mapfilename          | `name`                                      | The name of the file used for the KFMapSummary section mapname. Can be set differently for accessibility.                                                                                  |
+| screenshot           | UI_MapPreview_TEX.UI_MapPreview_Placeholder | The thumbnail image to use for the map.                                                                                                                                                    |
+| playableInSurvival   | true                                        | Determines if the map can be played in survival mode.                                                                                                                                      |
+| playableInWeekly     | true                                        | Determines if the map can be played in weekly mode.                                                                                                                                        |
+| playableInEndless    | true                                        | Determines if the map can be played in endless mode.                                                                                                                                       |
+| playableInVsSurvival | true                                        | Determines if the map can be played in vs survival mode.                                                                                                                                   |
+| playableInObjective  | true                                        | Determines if the map can be played in objective mode.                                                                                                                                     |
+| mapAssociation       | 1                                           | Determines if the map is official (2) or custom (1). This should almost always be 1 but is settable for accessibility.                                                                     |
 
 
-    [OnlineSubsystemSteamworks.KFWorkshopSteamworks]
-    ServerSubscribedWorkshopItems=1258411772
-
-
-You'll also need to add the maps to `LinuxServer-KFGame.ini` as described in the wiki [here][3] and [here][4].
-
-[3]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Maps
-[4]: https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Get_Custom_Maps_To_Show_In_Web_Admin
-
-Examples:
-
-    [KFGame.KFGameInfo]
-    ...
-    GameMapCycles=(Maps=("KF-BurningParis","KF-Biolapse"))
-    ...
-
-    [KF-Biolapse KFMapSummary]
-    MapName=KF-Biolapse
-    ScreenshotPathName=UI_MapPreview_TEX.UI_MapPreview_Placeholder
 
 
 Building the image

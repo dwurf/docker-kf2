@@ -5,6 +5,7 @@ set -o xtrace
 mkdir -p kf2server
 source kf2_functions.sh
 
+require_ruby
 require_steamcmd
 require_kf2
 if [[ $1 = "update" ]]; then

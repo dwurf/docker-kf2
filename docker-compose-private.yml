@@ -14,23 +14,24 @@ services:
             - 0.0.0.0:7777:7777/udp
             - 0.0.0.0:8080:8080
         environment:
-            - KF_DIFFICULTY=1
-            - KF_GAME_LENGTH=1
-            - KF_SERVER_NAME="My Private Server"
-            - KF_ENABLE_WEB=true
             - KF_ADMIN_PASS=secret
-            - KF_GAME_PASS=friends_only
-            - KF_DISABLE_TAKEOVER=true
-            - KF_MAP=KF-BioticsLab
-            - KF_QUERY_PORT=27015
-            - KF_PORT=7777
-            - KF_WEBADMIN_PORT=8080
             - KF_BANNER_LINK="http:\/\/art.tripwirecdn.com\/TestItemIcons\/MOTDServer.png"
+            - KF_DIFFICULTY=1
+            - KF_DISABLE_TAKEOVER=true
+            - KF_ENABLE_WEB=true
+            - KF_GAME_LENGTH=1
+            - KF_GAME_PASS=friends_only
+            - KF_MAP=KF-BioticsLab
             - KF_MOTD="Welcome to our server!"
+            - KF_PORT=7777
+            - KF_QUERY_PORT=27015
+            - KF_SERVER_NAME="My Private Server"
+            - KF_WEBADMIN_PORT=8080
             - KF_WEBSITE_LINK="https:\/\/killingfloor2.com\/"
         volumes:
             - ./kf2server/:/home/steam/kf2server 
             - ./kf2_steamdir/:/home/steam/steam 
+            - ./game.yml:/home/steam/game.yml:ro
         logging:
             # limit logs retained on host to 25MB
             driver: "json-file"
