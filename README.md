@@ -37,7 +37,7 @@ Simple start
 Configuring the server
 ----------------------
 
-Initial configuration is done via environment variables. To run a long game on the `hard` setting, run the following:
+Initial server state configuration is done via environment variables. To run a long game on the `hard` setting, run the following:
 
     docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
         -p 0.0.0.0:27015:27015/udp \
