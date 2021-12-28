@@ -48,18 +48,20 @@ function update() {
 
 function require_config() {
   
-    # Generate INI files
+    # Generate INI files if they don't exist
     if [[ ! -f "${HOME}/kf2server/KFGame/Config/PCServer-KFGame.ini" ]]; then
         "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
         sleep 20
-        kfpid=$(pgrep -f port=7777)
+        kfpid=$(pgrep -f "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64")
         kill $kfpid
+	echo "Killed KF2 server - will restart momentarily"
         #Workaround as per https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Setting_Up_Steam_Workshop_For_Servers
         mkdir -p "${HOME}/kf2server/KFGame/Cache"
     fi
 
     if [[ -f "${HOME}/game.yml" ]]; then
       (
+      	echo "Generating configuration"
         cd "${HOME}/configurator"
         ruby GenerateConfig.rb
       )
