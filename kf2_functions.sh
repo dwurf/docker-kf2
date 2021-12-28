@@ -49,7 +49,7 @@ function update() {
 function require_config() {
   
     # Generate INI files if they don't exist
-    if [[ ! -f "${HOME}/kf2server/KFGame/Config/PCServer-KFGame.ini" ]]; then
+    if [[ ! -f "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini" ]]; then
         "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
         sleep 20
         kfpid=$(pgrep -f "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64")
