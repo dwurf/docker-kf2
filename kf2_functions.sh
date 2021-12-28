@@ -26,9 +26,9 @@ function require_kf2() {
     [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || ( \
         cd "${HOME}/steam"
         ./steamcmd.sh \
-            +login anonymous \
             +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 validate \
+            +login anonymous  \
             +exit
     )
 }
@@ -38,9 +38,9 @@ function update() {
     (
         cd "${HOME}/steam"
         ./steamcmd.sh \
-            +login anonymous \
             +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 "$@" \
+            +login anonymous \
             +exit
     )
 }
