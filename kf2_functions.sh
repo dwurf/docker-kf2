@@ -26,9 +26,9 @@ function require_kf2() {
     [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || ( \
         cd "${HOME}/steam"
         ./steamcmd.sh \
-            +login anonymous \
             +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 validate \
+            +login anonymous  \
             +exit
     )
 }
@@ -38,9 +38,9 @@ function update() {
     (
         cd "${HOME}/steam"
         ./steamcmd.sh \
-            +login anonymous \
             +force_install_dir "${HOME}/kf2server" \
             +app_update 232130 "$@" \
+            +login anonymous \
             +exit
     )
 }
@@ -48,18 +48,20 @@ function update() {
 
 function require_config() {
   
-    # Generate INI files
-    if [[ ! -f "${HOME}/kf2server/KFGame/Config/PCServer-KFGame.ini" ]]; then
-        "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 &
-        sleep 20
-        kfpid=$(pgrep -f port=7777)
-        kill $kfpid
+    # Generate INI files if they don't exist
+    if [[ ! -f "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini" ]]; then
+        "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 > /dev/null 2>&1 &
+        kfpid=$!
+	sleep 20
+        kill -9 $kfpid
+	echo "Killed KF2 server - will restart momentarily"
         #Workaround as per https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_%28Killing_Floor_2%29#Setting_Up_Steam_Workshop_For_Servers
         mkdir -p "${HOME}/kf2server/KFGame/Cache"
     fi
 
     if [[ -f "${HOME}/game.yml" ]]; then
       (
+      	echo "Generating configuration"
         cd "${HOME}/configurator"
         ruby GenerateConfig.rb
       )

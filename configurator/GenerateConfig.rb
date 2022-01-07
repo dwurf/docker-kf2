@@ -7,7 +7,7 @@ require './MapList.rb'
 
 #Generate map list
 #Get the official map list then add any custom ones to the end of the array
-gameconfig = YAML.load(IO.read("/home/steam/game.yml"))
+gameconfig = YAML.load(IO.read("#{ENV['HOME']}/game.yml"))
 maplist = YAML.load_file("DefaultMaps.yml")
 if gameconfig.key?("custommaps")
   if gameconfig["custommaps"] != []
