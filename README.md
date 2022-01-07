@@ -37,7 +37,7 @@ Simple start
 Configuring the server
 ----------------------
 
-Configuration is done via environment variables. To run a long, hard server:
+Initial server state configuration is done via environment variables. To run a long game on the `hard` setting, run the following:
 
     docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
         -p 0.0.0.0:27015:27015/udp \
@@ -52,7 +52,7 @@ Configuration is done via environment variables. To run a long, hard server:
 Updating the server
 -------------------
 
-Run with the command `update`
+Run the container with the command `update`
 
     docker run -d -t --name kf2 -p 0.0.0.0:20560:20560/udp \
         -p 0.0.0.0:27015:27015/udp \
@@ -105,7 +105,7 @@ Running multiple servers
 
 1. Ensure 'command' in docker-compose.yml is not present. Updates will be
    handled from the first server only.
-2. Change ports (increment), set environment variables to match
+2. Expose different ports (e.g. increment) in each case, set `KF_PORT`, `KF_QUERY_PORT` (can be left as normal if it's `KF_PORT + 19238`) and `KF_WEBADMIN_PORT` (if `KF_ENABLE_WEB` is `true`) environment variables to match.
 3. Change server name (optional)
 
 Update the volume mounts as follows:
@@ -130,10 +130,13 @@ You *must* also copy the basic config files from server1
     mkdir -p $HOME/kf2-server2/kf2server/KFGame/Config
     cp -a $HOME/kf2/kf2server/KFGame/Config/* $HOME/kf2-server2/kf2server/KFGame/Config
 
-Steam Workshop maps
+Extra Configuration
 -------------------
+The configurator functions can be used to regenerate the KF2 configuration files. This is done using a `~/game.yml` file. If this exists, `~/configurator/GenerateConfig.rb` is run which templates the configuration files `KFGame` and `KFEngine`. The intention here is to allow for the map lists to more easily include customized maps.
 
-Find the map you wish to use on the Steam workshop, for example [https://steamcommunity.com/sharedfiles/filedetails/?id=1551913612][]. Note the ID argument from the URL (1551913612) and the name of the map (KF-NachtDerUntoten_TraderPod) and add this to a `game.yml` file in the root directory using the `custommaps` property, like so:
+Custom Maps
+------------
+Find the map you wish to use on the Steam workshop, for example [https://steamcommunity.com/sharedfiles/filedetails/?id=1551913612][]. Note the ID argument from the URL (1551913612) and the name of the map (KF-NachtDerUntoten_TraderPod) and add this to `~/game.yml`:
 
 ```
 custommaps:
@@ -142,11 +145,11 @@ custommaps:
       - 1551913612
 ```
 
-At runtime, the configuration files will be written and will include the map alongside the defaults. A number of things are possible to set for each map added. These are listed below:
+At runtime, the configuration files will be written and will include the map alongside the default maps (found in `configurator/DefaultMaps.yml`). A number of properties are possible to set for each map added via `game.yml`. These are listed below:
 
 | Property             | Default                                     | Description                                                                                                                                                                                |
 |----------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name                 | N/A                                         | Must be set otherwise the configuration will not be generated. The name of the map you're adding, per it's name in the Cache directory of the server.                                      |
+| name                 | N/A                                         | Must be set otherwise the configuration will not be generated. The name of the map you're adding, per it's name in the `Cache` directory of the server. If you're unsure what this is, you can add it with any name and it will still be downloaded after the server starts but will not appear in the map rotation. The `docker logs` for the container will contain references to the map and the looking in the cache directory usually shows the map name quite clearly.                                       |
 | steamworksids        | N/A                                         | Must be set in order to download the map at runtime. An array of IDs provided to the KFEngine ini file to download the relevant map. This can be set to multiple things for accessibility. |
 | mapfilename          | `name`                                      | The name of the file used for the KFMapSummary section mapname. Can be set differently for accessibility.                                                                                  |
 | screenshot           | UI_MapPreview_TEX.UI_MapPreview_Placeholder | The thumbnail image to use for the map.                                                                                                                                                    |
@@ -178,5 +181,3 @@ TODO
 * This is docker, we shouldn't need logs (use `docker logs`) and config should be done via env variables (i.e. move the config file outside of the volume but it doesn't need to be exposed)
 * See also ConfigSubDir under https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Command_Line_Launch_Options
 * Add support for custom map cycles https://wiki.tripwireinteractive.com/index.php?title=Dedicated_Server_(Killing_Floor_2)#Maps
-
-
