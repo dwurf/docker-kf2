@@ -7,7 +7,7 @@ function require_steamcmd() {
         cd "${HOME}/steam"
         tar xzvf downloads/steamcmd_linux.tar.gz
     )
-    
+
     (
         cd "${HOME}/steam"
         ./steamcmd.sh +exit
@@ -27,8 +27,8 @@ function require_kf2() {
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
-            +app_update 232130 validate \
             +login anonymous  \
+            +app_update 232130 validate \
             +exit
     )
 }
@@ -39,15 +39,15 @@ function update() {
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
-            +app_update 232130 "$@" \
             +login anonymous \
+            +app_update 232130 "$@" \
             +exit
     )
 }
 
 
 function require_config() {
-  
+
     # Generate INI files if they don't exist
     if [[ ! -f "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini" ]]; then
         "${HOME}/kf2server/Binaries/Win64/KFGameSteamServer.bin.x86_64" kf-bioticslab?difficulty=0?adminpassword=secret?gamepassword=secret -port=7777 > /dev/null 2>&1 &
@@ -123,7 +123,7 @@ function load_config() {
     sed -i "s/^GameLength=.*/GameLength=$KF_GAME_LENGTH\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^ServerName=.*/ServerName=$KF_SERVER_NAME\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFGame.ini"
     sed -i "s/^bEnabled=.*/bEnabled=$KF_ENABLE_WEB\r/" "${HOME}/kf2server/KFGame/Config/KFWeb.ini"
-    if [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]]; then 
+    if [[ "${KF_DISABLE_TAKEOVER}" == 'true' ]]; then
       sed -i "s/^bUsedForTakeover=.*/bUsedForTakeover=FALSE\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
     else
       sed -i "s/^bUsedForTakeover=.*/bUsedForTakeover=TRUE\r/" "${HOME}/kf2server/KFGame/Config/LinuxServer-KFEngine.ini"
